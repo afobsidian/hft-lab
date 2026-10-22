@@ -38,17 +38,6 @@ sudo apt-get install clang libclang-rt-dev clang-tools cmake ninja-build g++
 The presets select `clang++`; they use the system standard library rather than requiring
 libc++. Run `clang-format -i` only on files you intend to format.
 
-### Zed completion and navigation
-
-Zed uses clangd for C++. The checked-in `.clangd` points it at CMake's generated
-`build/debug/compile_commands.json`, so completion, diagnostics and go-to-definition use
-the project's actual C++20 flags and include paths. No global Zed settings are needed.
-
-Run `make` once after cloning and whenever the CMake sources, include paths or definitions
-change. Editor analysis deliberately uses the Debug preset, even if you also build Release
-or sanitizer configurations. If Zed is already open and still shows unresolved includes,
-run `editor: restart language server` from its command palette.
-
 ## Build and run
 
 With GNU Make installed, the shortcuts below wrap the same CMake presets used by CI:
