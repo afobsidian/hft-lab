@@ -3,6 +3,10 @@
 A C++20 learning project: build a deterministic exchange matching engine, measure it,
 improve its storage and concurrency, then connect a simulated trading client.
 
+Project documentation: [delivery plan](docs/project-plan.md) and
+[system architecture](docs/architecture.md). These describe the application independently
+of the [learning roadmap](docs/learning-plan.md) and [exercises](docs/exercises.md).
+
 **Status: exercise 1 complete; matching engine is exercise 2.** The FIFO price level passes
 all eight supplied scenarios. CI runs the scaffold and completed price-level checks;
 the order book remains unimplemented. There are no performance results yet.
@@ -51,8 +55,9 @@ With GNU Make installed, the shortcuts below wrap the same CMake presets used by
 
 ```sh
 make                           # Debug build
-make scaffold                  # Build and run scaffold checks (also used by CI)
+make scaffold                  # Build and run scaffold checks
 make exercise                  # Build and run the registered exercise checks
+make test                      # All registered checks (also used by CI)
 make test PRESET=sanitize      # Build and run all checks with sanitizers
 make build PRESET=release      # Optimised build
 make run                       # Run the demo; initially reports unimplemented matching
