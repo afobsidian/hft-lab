@@ -7,13 +7,17 @@ you learned. Implement the stages yourself rather than asking for complete solut
 
 ## 1. One FIFO price level
 
-Follow [exercise 1](first-exercise.md). Own orders in `std::list`, validate before insertion,
+See the completed [exercise 1 checklist](exercises.md#exercise-1-fifo-price-level--complete).
+Own orders in `std::list`, validate before insertion,
 fill only the oldest order and cancel without disturbing surviving priority.
 
-**Complete when:** the eight supplied scenarios and your additional edge case pass in
-Debug, sanitizer and Release builds. Explain ownership and iterator/pointer validity.
+**Completed:** the eight supplied scenarios pass in Debug, sanitizer and Release builds.
+Optional follow-up: add your own ID-reuse or maximum-quantity test.
 
 ## 2. Deterministic limit order book
+
+Follow [exercise 2](exercises.md#exercise-2-build-the-limit-order-book) for the contract,
+worked example and implementation checkpoints.
 
 Implement `OrderBook::apply`. Use ordered maps of price levels, with highest bid and lowest
 ask first. Reuse `PriceLevel`; add a book-wide active-ID index. Linear cancellation within

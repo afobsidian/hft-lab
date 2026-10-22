@@ -20,8 +20,8 @@ class PriceLevel {
     bool cancel(OrderId id);
 
   private:
-    [[maybe_unused]] Side side_; // Exercise 1 will use these for validation.
-    [[maybe_unused]] Price price_;
+    Side side_; // Exercise 1 will use these for validation.
+    Price price_;
     // shortcut: linear cancellation, add an ID index when profiling warrants it.
     std::list<Order> orders_;
 };

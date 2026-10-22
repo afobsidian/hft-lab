@@ -1,4 +1,4 @@
-name: Clang scaffold
+name: Clang checks
 on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
@@ -13,5 +13,4 @@ jobs:
       - uses: actions/checkout@v7.0.1
       - name: Install toolchain
         run: sudo apt-get update && sudo apt-get install -y clang libclang-rt-dev cmake ninja-build make
-      # Exercise checks intentionally fail until you implement PriceLevel.
-      - run: make scaffold PRESET=${{ matrix.preset }}
+      - run: make test PRESET=${{ matrix.preset }}

@@ -3,15 +3,16 @@
 A C++20 learning project: build a deterministic exchange matching engine, measure it,
 improve its storage and concurrency, then connect a simulated trading client.
 
-**Status: runnable scaffold, not a working matching engine.** The first exercise is
-deliberately unimplemented. Green CI means the scaffold builds and its CLI checks pass;
-it does not mean the order book or exercises work. There are no performance results yet.
+**Status: exercise 1 complete; matching engine is exercise 2.** The FIFO price level passes
+all eight supplied scenarios. CI runs the scaffold and completed price-level checks;
+the order book remains unimplemented. There are no performance results yet.
 
 ## Start here
 
 1. Follow the build steps below.
-2. Open [your first exercise](docs/first-exercise.md): implement one FIFO price level.
-3. Follow the [learning roadmap](docs/learning-plan.md) after its eight scenarios pass.
+2. Open [the exercises](docs/exercises.md): review exercise 1's completed checklist and
+   start exercise 2, the limit order book.
+3. Follow the [learning roadmap](docs/learning-plan.md) for later stages.
 
 The main loop lives in [src/main.cpp](src/main.cpp). Matching remains a stage 2 TODO;
 completing the price-level exercise alone will not make the demo match orders.
@@ -51,8 +52,8 @@ With GNU Make installed, the shortcuts below wrap the same CMake presets used by
 ```sh
 make                           # Debug build
 make scaffold                  # Build and run scaffold checks (also used by CI)
-make exercise                  # Build and run your exercise checks; initially fails
-make test PRESET=sanitize      # Build and run all checks with sanitizers; initially fails
+make exercise                  # Build and run the registered exercise checks
+make test PRESET=sanitize      # Build and run all checks with sanitizers
 make build PRESET=release      # Optimised build
 make run                       # Run the demo; initially reports unimplemented matching
 make clean                     # Clean the selected preset's configured build
@@ -70,7 +71,7 @@ ctest --preset debug -L scaffold
 # Initially fails with a clear OrderBook::apply "not implemented" message (exit 1).
 ./build/debug/hft_lab --demo
 
-# Initially fails: this is your implementation assignment.
+# Run the registered exercise checks (PriceLevel is complete).
 ctest --preset debug -L exercise
 ```
 
@@ -78,8 +79,8 @@ Use the same commands with `sanitize` or `release` in place of `debug`. The sani
 preset enables AddressSanitizer and UndefinedBehaviorSanitizer. The Release preset has
 optimisation enabled and sanitizers disabled. Test checks remain active in Release.
 
-Plain `ctest --preset debug` runs **both** labels, so it initially fails. CI deliberately
-runs `make scaffold`; once exercise 1 passes, change CI to `make test` to run both labels.
+Plain `ctest --preset debug` runs **both** labels. CI runs `make test` for every preset;
+new exercise tests participate once you register them in CMake.
 
 ## Main-loop sketch
 
