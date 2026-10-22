@@ -36,6 +36,21 @@ directory in your editor). Run `clang-format -i` only on files you intend to for
 
 ## Build and run
 
+With GNU Make installed, the shortcuts below wrap the same CMake presets used by CI:
+
+```sh
+make                           # Debug build
+make scaffold                  # Build and run scaffold checks (also used by CI)
+make exercise                  # Build and run your exercise checks; initially fails
+make test PRESET=sanitize      # Build and run all checks with sanitizers; initially fails
+make build PRESET=release      # Optimised build
+make run                       # Run the demo; initially reports unimplemented matching
+make clean                     # Clean the selected preset's configured build
+```
+
+`PRESET` defaults to `debug`; use `debug`, `sanitize` or `release`. `make clean` requires
+that preset to have been configured. To run CMake directly:
+
 ```sh
 cmake --preset debug
 cmake --build --preset debug
@@ -54,7 +69,7 @@ preset enables AddressSanitizer and UndefinedBehaviorSanitizer. The Release pres
 optimisation enabled and sanitizers disabled. Test checks remain active in Release.
 
 Plain `ctest --preset debug` runs **both** labels, so it initially fails. CI deliberately
-runs only `-L scaffold`; once exercise 1 passes, change CI to run both labels.
+runs `make scaffold`; once exercise 1 passes, change CI to `make test` to run both labels.
 
 ## Main-loop sketch
 

@@ -73,8 +73,8 @@ oversized fills, zero fills, cancellation positions, invalid additions and sell 
 Done means all scenarios pass in all three presets, including sanitizers, and you can
 explain why a partial fill keeps priority, why validation precedes mutation, and when a
 borrowed pointer becomes invalid. Add one edge-case test of your own (for example ID
-reuse after cancellation or maximum quantity), then remove `-L scaffold` from CI so the
-completed exercise stays checked.
+reuse after cancellation or maximum quantity), then change CI from `make scaffold` to
+`make test` so the completed exercise stays checked.
 
 The demo still exits with an OrderBook TODO until stage 2. Next, work through
 [the learning plan](learning-plan.md); do not skip straight to atomics.

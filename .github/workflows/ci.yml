@@ -12,8 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - name: Install toolchain
-        run: sudo apt-get update && sudo apt-get install -y clang libclang-rt-dev cmake ninja-build
-      - run: cmake --preset ${{ matrix.preset }}
-      - run: cmake --build --preset ${{ matrix.preset }}
+        run: sudo apt-get update && sudo apt-get install -y clang libclang-rt-dev cmake ninja-build make
       # Exercise checks intentionally fail until you implement PriceLevel.
-      - run: ctest --preset ${{ matrix.preset }} -L scaffold
+      - run: make scaffold PRESET=${{ matrix.preset }}
