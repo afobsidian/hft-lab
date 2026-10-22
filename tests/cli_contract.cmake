@@ -1,0 +1,25 @@
+if(NOT DEFINED APP)
+  message(FATAL_ERROR "APP must name the demo executable")
+endif()
+
+execute_process(COMMAND "${APP}" --help RESULT_VARIABLE status OUTPUT_VARIABLE output)
+if(NOT status EQUAL 0 OR NOT output MATCHES "Usage: hft_lab")
+  message(FATAL_ERROR "--help must succeed and print usage")
+endif()
+
+foreach(mode IN ITEMS "--unknown" "")
+  execute_process(COMMAND "${APP}" "${mode}" RESULT_VARIABLE status ERROR_VARIABLE output)
+  if(NOT status EQUAL 2 OR NOT output MATCHES "Usage: hft_lab")
+    message(FATAL_ERROR "Invalid arguments must exit 2 and print usage")
+  endif()
+endforeach()
+
+execute_process(COMMAND "${APP}" RESULT_VARIABLE status ERROR_VARIABLE output)
+if(NOT status EQUAL 2 OR NOT output MATCHES "Usage: hft_lab")
+  message(FATAL_ERROR "Missing arguments must exit 2 and print usage")
+endif()
+
+execute_process(COMMAND "${APP}" --help --demo RESULT_VARIABLE status ERROR_VARIABLE output)
+if(NOT status EQUAL 2 OR NOT output MATCHES "Usage: hft_lab")
+  message(FATAL_ERROR "Extra arguments must exit 2 and print usage")
+endif()
